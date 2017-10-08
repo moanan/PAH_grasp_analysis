@@ -1,2 +1,7 @@
 # PAH_grasp_analysis
-grasp analysis of pin array hand
+
+Pin array hand is able to grasp various objects. This project simulates how different pin array hand configurations are to grasp different objects in matlab environment.
+
+- created by An Mo
+- on 8th Oct. 2017
+- in Tsinghua University
