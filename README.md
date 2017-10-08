@@ -4,4 +4,3 @@ Pin array hand is able to grasp various objects. This project simulates how diff
 
 - created by An Mo
 - on 8th Oct. 2017
-- in Tsinghua University
