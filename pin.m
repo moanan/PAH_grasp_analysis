@@ -21,7 +21,7 @@ classdef pin < handle
         end
         %% generate only once the contour of pin
         function generateContour(obj, a, b)
-            obj.contour = oval_contour(a, b, obj.orientation_d, obj.position_x, obj.position_y);
+            obj.contour = contour_oval(a, b, obj.orientation_d, obj.position_x, obj.position_y);
         end
         %% update the orientation of a pin
         function rotate(obj, rotationAngle_d)
@@ -37,6 +37,7 @@ classdef pin < handle
         end
 
         %% overwrite of plot command to show the corresponding pin
+        % TO DO: define the color of rotation
         function plot(obj)
             plot(obj.contour(1,:),obj.contour(2,:));axis equal;
         end

@@ -1,5 +1,5 @@
 classdef obj2grasp < handle
-    %OBJ2GRASP is an object, which can be in various shape
+    %OBJ2GRASP is an object, which can be in various shape. 
     %   Created by An Mo on 20th Sept. 2017
     %   Modified by An Mo on 6th Oct. 2017
     
@@ -9,20 +9,31 @@ classdef obj2grasp < handle
         orientation_d               % counter-clockwise rotation (deg)
         isContacted = 0
         contour
+        shapeIndex                  % 1 = flower
+                                    % 2 = ellipse
     end
     
     methods
         %% constructor
-        function obj = obj2grasp(position_x, position_y, orientation_d)
+        function obj = obj2grasp(position_x, position_y, orientation_d, shapeIndex)
             obj.position_x = position_x;
             obj.position_y = position_y;
             obj.orientation_d = orientation_d;
+            obj.shapeIndex = shapeIndex;
         end
         
-        %% generate the shape of the object
+        %% generate the contour of the object according to the shape index
         function generateContour(obj, a, b)
-            obj.contour = contour_flower(a, b, obj.orientation_d, obj.position_x, obj.position_y);
-            obj.rotate(obj.orientation_d);
+            switch(obj.shapeIndex)
+                case 1 
+                    obj.contour = contour_flower(a, b, obj.orientation_d, obj.position_x, obj.position_y);
+                    obj.rotate(obj.orientation_d);
+                case 2
+                    obj.contour = contour_oval(a, b, obj.orientation_d, obj.position_x, obj.position_y);
+                    obj.rotate(obj.orientation_d);
+                otherwise
+                    disp("Shape index invalid!");
+            end                
         end
         
         %% update orientation

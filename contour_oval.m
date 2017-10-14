@@ -1,4 +1,4 @@
-function contour_points = oval_contour( a, b, phi_d, Tx, Ty )
+function contour_points = contour_oval( a, b, phi_d, Tx, Ty )
 %This function return the contour points of an ellipse, given the
 %semi-major axis, semi-minor axis, rotating angle and translation
 %displacement
