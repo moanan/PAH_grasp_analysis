@@ -37,9 +37,14 @@ classdef pin < handle
         end
 
         %% overwrite of plot command to show the corresponding pin
-        % TO DO: define the color of rotation
         function plot(obj)
-            plot(obj.contour(1,:),obj.contour(2,:));axis equal;
+            if(obj.rotationDirection)  % clockwise rotation pins are marked in blue, while the other in yellow
+                fill(obj.contour(1,:),obj.contour(2,:),'b');axis equal;
+%                 plot(obj.contour(1,:),obj.contour(2,:),'b');axis equal;
+            else
+                fill(obj.contour(1,:),obj.contour(2,:),'r');axis equal;
+%                 plot(obj.contour(1,:),obj.contour(2,:),'r');axis equal;
+            end
         end
     end
 end

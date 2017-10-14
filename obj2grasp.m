@@ -9,22 +9,24 @@ classdef obj2grasp < handle
         orientation_d               % counter-clockwise rotation (deg)
         isContacted = 0
         contour
-        shapeIndex                  % 1 = flower
+        objectShapeIndex            % indicate the shape of object
+                                    % 1 = flower
                                     % 2 = ellipse
     end
     
     methods
         %% constructor
-        function obj = obj2grasp(position_x, position_y, orientation_d, shapeIndex)
+        function obj = obj2grasp(position_x, position_y, orientation_d, objectShapeIndex)
             obj.position_x = position_x;
             obj.position_y = position_y;
             obj.orientation_d = orientation_d;
-            obj.shapeIndex = shapeIndex;
+            obj.objectShapeIndex = objectShapeIndex;
         end
         
         %% generate the contour of the object according to the shape index
+
         function generateContour(obj, a, b)
-            switch(obj.shapeIndex)
+            switch(obj.objectShapeIndex)
                 case 1 
                     obj.contour = contour_flower(a, b, obj.orientation_d, obj.position_x, obj.position_y);
                     obj.rotate(obj.orientation_d);

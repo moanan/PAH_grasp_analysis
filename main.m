@@ -24,8 +24,8 @@ global eccentricity
 %% Fig. 2 
 numberOfPins = 20;
 rotationStroke = 90;
-eccentricity = 0.8;
-maxNumberOfContacted = graspTestEllipse(numberOfPins,rotationStroke)
+eccentricity = 0.85;
+maxNumberOfContacted = graspTestEllipse(numberOfPins,rotationStroke,2)
 % numberOfPins = 10;
 % maxNumberOfContacted = graspTestEllipse(numberOfPins,rotationStroke);
 
