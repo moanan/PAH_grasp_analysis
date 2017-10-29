@@ -29,13 +29,15 @@ classdef obj2grasp < handle
             switch(obj.objectShapeIndex)
                 case 1 
                     obj.contour = contour_flower(a, b, obj.orientation_d, obj.position_x, obj.position_y);
-                    obj.rotate(obj.orientation_d);
                 case 2
                     obj.contour = contour_oval(a, b, obj.orientation_d, obj.position_x, obj.position_y);
-                    obj.rotate(obj.orientation_d);
+                case 3
+                    obj.contour = contour_others(a, b, obj.orientation_d, obj.position_x, obj.position_y);
+                    % a and b can be the scale in x and y direction
                 otherwise
                     disp("Shape index invalid!");
-            end                
+            end
+            obj.rotate(obj.orientation_d);
         end
         
         %% update orientation
