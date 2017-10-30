@@ -33,7 +33,7 @@ classdef obj2grasp < handle
                     obj.contour = contour_oval(a, b, obj.orientation_d, obj.position_x, obj.position_y);
                 case 3
                     obj.contour = contour_others(a, b, obj.orientation_d, obj.position_x, obj.position_y);
-                    % a and b can be the scale in x and y direction
+                    % a and b can be the scale in x and y direction or null
                 otherwise
                     disp("Shape index invalid!");
             end
