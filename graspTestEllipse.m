@@ -82,8 +82,29 @@ switch(objectShapeIndex)
     case 2
         a_object = 50;
         b_object = 30;
+    case 3
+        a_object = objectShapeIndex - 2;            % a_object is the index of image
+        b_object = 1;                               % b_object is the scale
+    case 4
+        a_object = objectShapeIndex - 2;            % a_object is the index of image
+        b_object = 1;                               % b_object is the scale
+    case 5
+        a_object = objectShapeIndex - 2;            % a_object is the index of image
+        b_object = 1;                               % b_object is the scale        
+    case 6
+        a_object = objectShapeIndex - 2;            % a_object is the index of image
+        b_object = 0.7;                               % b_object is the scale        
+    case 7
+        a_object = objectShapeIndex - 2;            % a_object is the index of image
+        b_object = 1;                               % b_object is the scale        
+    case 8
+        a_object = objectShapeIndex - 2;            % a_object is the index of image
+        b_object = 1;                               % b_object is the scale        
+    case 9
+        a_object = objectShapeIndex - 2;            % a_object is the index of image
+        b_object = 1;                               % b_object is the scale         
     otherwise
-        disp("Shape index invalid!");
+        error('Shape index invalid!');
 end
 object1 = obj2grasp(x_object, y_object, orientation_object, objectShapeIndex);
 object1.generateContour(a_object, b_object);
@@ -121,12 +142,12 @@ toc;
 %% draw pins with rotation
 % from here on, simulation begins...
 
-% v = VideoWriter('contour adaption flower.mp4','MPEG-4'); Das funktioniert nicht...
-v = VideoWriter('contour adaption flower.avi');
-v.FrameRate = 2;
-open(v);
-frame = getframe(gcf);      % record the first frame
-writeVideo(v,frame);
+%% video recording (commands in the middle and the last few lines also need to be taken care of)
+% v = VideoWriter('contour adaption flower.avi');
+% v.FrameRate = 2;
+% open(v);
+% frame = getframe(gcf);      % record the first frame
+% writeVideo(v,frame);
 clf;
 
 for t = 1:rotationTimes     % every time rotation, the object is already moved only once considering each collision
@@ -138,7 +159,7 @@ for t = 1:rotationTimes     % every time rotation, the object is already moved o
     for i = 1:n*m-numberOfRemove
         ellipses(i).rotate(rotationSpeedOfPin_d);        
         contactPoints = InterX(object1.contour, ellipses(i).contour);   % not stable enough...
-        ellipses(i).plot();                 % plot so many ellipse pins is very time comsuming!!!!!!!!!!!!!!!!!!!!!!!!!!
+%         ellipses(i).plot();                 % plot so many ellipse pins is very time comsuming!!!!!!!!!!!!!!!!!!!!!!!!!!
         if(~isempty(contactPoints))         % if contacted, mark the contact point
             %% pushObject
             [closestPoint,eachObjectTranslation,eachObjectRotation] = pushObject(object1, ellipses(i), contactPoints, rotationSpeedOfPin_d);
@@ -155,10 +176,10 @@ for t = 1:rotationTimes     % every time rotation, the object is already moved o
     object1.translate(objectTranslation(1),objectTranslation(2));
     object1.rotate(objectRotation); 
     % statistics
-    title('15 x 15 pin array hand simulation');
+    title([num2str(n),' x ',num2str(m),' pin array hand simulation']);   %'15 x 15 pin array hand simulation'
     xlabel(['Number of contacted pins is: ',num2str(numberOfContactedPins)]);
-    frame = getframe(gcf);      % record the process
-    writeVideo(v,frame);
+%     frame = getframe(gcf);      % record the process
+%     writeVideo(v,frame);
     if(numberOfContactedPins > 0)
         disp(['Contacted! Number of contacted pins is: ',num2str(numberOfContactedPins)]);
         if(numberOfContactedPins > maxNumberOfContacted)        % save the maximun number of contacted pins
@@ -173,6 +194,6 @@ for t = 1:rotationTimes     % every time rotation, the object is already moved o
     end
 end
 disp(['Maximun number of contacted pins are: ', num2str(maxNumberOfContacted)]);
-close(v);
+% close(v);
 
 end

@@ -27,13 +27,25 @@ classdef obj2grasp < handle
 
         function generateContour(obj, a, b)
             switch(obj.objectShapeIndex)
-                case 1 
+                case 1
                     obj.contour = contour_flower(a, b, obj.orientation_d, obj.position_x, obj.position_y);
                 case 2
                     obj.contour = contour_oval(a, b, obj.orientation_d, obj.position_x, obj.position_y);
                 case 3
-                    obj.contour = contour_others(a, b, obj.orientation_d, obj.position_x, obj.position_y);
-                    % a and b can be the scale in x and y direction or null
+                    obj.contour = contour_images(obj.objectShapeIndex - 2, b, obj.orientation_d, obj.position_x, obj.position_y);
+                case 4
+                    obj.contour = contour_images(obj.objectShapeIndex - 2, b, obj.orientation_d, obj.position_x, obj.position_y);
+                case 5
+                    obj.contour = contour_images(obj.objectShapeIndex - 2, b, obj.orientation_d, obj.position_x, obj.position_y);
+                case 6
+                    obj.contour = contour_images(obj.objectShapeIndex - 2, b, obj.orientation_d, obj.position_x, obj.position_y);
+                case 7
+                    obj.contour = contour_images(obj.objectShapeIndex - 2, b, obj.orientation_d, obj.position_x, obj.position_y);
+                case 8
+                    obj.contour = contour_images(obj.objectShapeIndex - 2, b, obj.orientation_d, obj.position_x, obj.position_y);
+                case 9
+                    obj.contour = contour_images(obj.objectShapeIndex - 2, b, obj.orientation_d, obj.position_x, obj.position_y);
+                    % a is the index of image and b is the scale
                 otherwise
                     disp("Shape index invalid!");
             end

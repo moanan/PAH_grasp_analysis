@@ -1,3 +1,7 @@
+% Please remember to command out the video generation codes (in graspTest.m files)
+% when using parallel computing in simulation!
+
+
 clear;clc;clf;
 tic;
 
@@ -22,12 +26,17 @@ global eccentricity
 
 
 %% Fig. 2 
-numberOfPins = 20;
+numberOfPins = 15;
 rotationStroke = 90;
 eccentricity = 0.85;
-maxNumberOfContacted = graspTestEllipse(numberOfPins,rotationStroke,2)
-% numberOfPins = 10;
-% maxNumberOfContacted = graspTestEllipse(numberOfPins,rotationStroke);
+
+averageMaxNumberOfContacted = 0;
+for objectShapeIndex = 1:9
+    maxNumberOfContacted = graspTestEllipse(numberOfPins,rotationStroke,objectShapeIndex);
+    averageMaxNumberOfContacted = averageMaxNumberOfContacted + maxNumberOfContacted;
+end
+averageMaxNumberOfContacted = averageMaxNumberOfContacted / 9;
+
 
 
 toc;

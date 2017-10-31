@@ -1,20 +1,23 @@
-
+% 
 clear;clc;clf;tic;
 % 4.6671    3.3329
 
 
-a = 10;
-b = 5;
-phi_d = 0;
+a = 6;
+b = 01;
+phi_d = 30;
 Tx = 0;
 Ty = 0;
 
-contour = contour_triangle( a, b, phi_d, Tx, Ty );
 
+
+contour = contour_images( a, b, phi_d, Tx, Ty );
+
+% contour = contour_oval( a, b, phi_d, Tx, Ty );
 plot(contour(1,:),contour(2,:));axis equal;
 
 
-
+%%
 
 % clc;clf;clear;
 % a_object = 5;
