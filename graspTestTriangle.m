@@ -16,11 +16,8 @@
 %% init
 % pins
 layerOfPins = 2;
-global spacing
 spacing = 120/(numberOfPins-1);
-x0=[eps,eps];
-myFunction = @root2d_ellipse;
-semiAxis = fsolve(myFunction,x0);
+semiAxis = semiAxisEllipse(spacing, eccentricity);
 a_pin = semiAxis(1);
 b_pin = semiAxis(2);
 centers = zeros(n,m,3);

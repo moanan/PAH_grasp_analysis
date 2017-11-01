@@ -1,21 +1,17 @@
 % 
 clear;clc;clf;tic;
 % 4.6671    3.3329
-
-
-a = 6;
-b = 01;
-phi_d = 30;
-Tx = 0;
-Ty = 0;
-
-
-
-contour = contour_images( a, b, phi_d, Tx, Ty );
-
-% contour = contour_oval( a, b, phi_d, Tx, Ty );
-plot(contour(1,:),contour(2,:));axis equal;
-
+% 
+% a = 6;
+% b = 01;
+% phi_d = 30;
+% Tx = 0;
+% Ty = 0;
+% 
+% contour = contour_images( a, b, phi_d, Tx, Ty );
+% 
+% % contour = contour_oval( a, b, phi_d, Tx, Ty );
+% plot(contour(1,:),contour(2,:));axis equal;
 
 %%
 
@@ -32,6 +28,18 @@ plot(contour(1,:),contour(2,:));axis equal;
 % object1.generateContour(a_object, b_object);
 % object1.plot();
 % hold on;
+
+global eccentricity
+global spacing
+eccentricity = 0.7;
+spacing = 90;
+
+x0=[eps,eps];
+myFunction = @root2d_ellipse;
+semiAxis1 = fsolve(myFunction,x0)
+
+semiAxis2 = semiAxisEllipse(spacing, eccentricity)
+
 
 
 toc

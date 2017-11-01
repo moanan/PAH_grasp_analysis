@@ -1,11 +1,11 @@
-function [maxNumberOfContacted] = graspTestEllipse(numberOfPins,rotationStroke,objectShapeIndex)
+function [maxNumberOfContacted] = graspTestEllipse(numberOfPins,eccentricity,rotationStroke,objectShapeIndex,noiseEnable)
 % %graspTest start a simulation with selected pins configuration and object
 %   inputs: 
 %       numberOfPins(per line)
 %       eccentricity(global variable),
 %       rotationStroke(0-90deg)
 %       objectShapeIndex(shape is fixed around 100 x 100mm)
-%       isRandom
+%       noiseEnable generate object's pose randomly
 %
 %   eccentricity is sqrt(1-(b/a)^2)
 %   the area of grasp is around 120 x 120mm
@@ -17,11 +17,8 @@ function [maxNumberOfContacted] = graspTestEllipse(numberOfPins,rotationStroke,o
 % pins
 n = numberOfPins;
 m = numberOfPins;
-global spacing
 spacing = 120/(numberOfPins-1);
-x0=[eps,eps];
-myFunction = @root2d_ellipse;
-semiAxis = fsolve(myFunction,x0);
+semiAxis = semiAxisEllipse(spacing, eccentricity);
 a_pin = semiAxis(1);
 b_pin = semiAxis(2);
 centers = zeros(n,m,3);
@@ -106,7 +103,12 @@ switch(objectShapeIndex)
     otherwise
         error('Shape index invalid!');
 end
-object1 = obj2grasp(x_object, y_object, orientation_object, objectShapeIndex);
+
+if(noiseEnable)
+    object1 = obj2grasp(x_object+rand, y_object+rand, orientation_object+rand, objectShapeIndex);
+else
+    object1 = obj2grasp(x_object, y_object, orientation_object, objectShapeIndex);
+end
 object1.generateContour(a_object, b_object);
 object1.plot();
 hold on;
@@ -137,7 +139,6 @@ for i = 1:n*m
 end
 ellipses(index) = [];
 numberOfRemove = length(index);
-toc;
 
 %% draw pins with rotation
 % from here on, simulation begins...
@@ -181,19 +182,19 @@ for t = 1:rotationTimes     % every time rotation, the object is already moved o
 %     frame = getframe(gcf);      % record the process
 %     writeVideo(v,frame);
     if(numberOfContactedPins > 0)
-        disp(['Contacted! Number of contacted pins is: ',num2str(numberOfContactedPins)]);
+%         disp(['Contacted! Number of contacted pins is: ',num2str(numberOfContactedPins)]);
         if(numberOfContactedPins > maxNumberOfContacted)        % save the maximun number of contacted pins
             maxNumberOfContacted = numberOfContactedPins;
         end
     else
-        disp('Not contacted.');
+%         disp('Not contacted.');
     end
     if(t~=rotationTimes)
 %         pause;               % uses breakpoint here to see the pin movement
         clf; 
     end
 end
-disp(['Maximun number of contacted pins are: ', num2str(maxNumberOfContacted)]);
+disp(['Maximun number of contacted pins of object (index ',num2str(objectShapeIndex),') are: ', num2str(maxNumberOfContacted)]);
 % close(v);
 
 end
