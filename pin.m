@@ -42,7 +42,7 @@ classdef pin < handle
                 fill(obj.contour(1,:),obj.contour(2,:),'b');axis equal;
 %                 plot(obj.contour(1,:),obj.contour(2,:),'b');axis equal;
             else
-                fill(obj.contour(1,:),obj.contour(2,:),'r');axis equal;
+                fill(obj.contour(1,:),obj.contour(2,:),'y');axis equal;
 %                 plot(obj.contour(1,:),obj.contour(2,:),'r');axis equal;
             end
         end

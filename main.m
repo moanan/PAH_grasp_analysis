@@ -23,7 +23,7 @@ clear;clc;clf;tic;
 
 
 
-%% Fig. 2 
+%% Fig. 2 Number of pins: 5x5 -> 30x30
 numberOfPins = 15;
 eccentricity = 0.85;
 rotationStroke = 90;
@@ -41,3 +41,9 @@ end
 averageMaxNumberOfContacted = averageMaxNumberOfContacted / (indexEnd*loop)
 
 toc;
+
+
+%% Fig. 3 Eccentricity
+
+
+
